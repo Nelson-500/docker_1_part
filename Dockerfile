@@ -1,16 +1,27 @@
+
 FROM centos
+
+LABEL version=1.0
+LABEL decription="THis is an apache image"
 
 RUN yum install httpd -y
 
-WORKDIR /var/www/html
+COPY  startbootstrap-agency-gh-pages /var/www/html
 
-COPY  startbootstrap-agency-gh-pages .
+RUN echo *$(whoami)* > /var/www/html/user1.html
 
-ENV contenido prueba
+RUN useradd nelson
 
-RUN echo "$contenido" > /var/www/html/prueba.html
 
-EXPOSE 8080
+USER nelson
+
+RUN echo *$(whoami)* > /tmp/user2.html
+
+VOLUME /var/www/html 
+
+USER root
+
+RUN cp /tmp/user2.html /var/www/html/user2.html
  
 CMD apachectl -DFOREGROUND
 
