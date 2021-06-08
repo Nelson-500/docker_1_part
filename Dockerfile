@@ -2,6 +2,6 @@ FROM centos
 
 RUN yum install httpd -y
 
-COPY  indus /var/www/html
+ADD  startbootstrap-agency-gh-pages /var/www/html
  
 CMD apachectl -DFOREGROUND
